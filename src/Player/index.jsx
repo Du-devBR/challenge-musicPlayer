@@ -1,4 +1,5 @@
 import './style.sass'
+import '../style/responsive.sass'
 import {  artists  } from '../assets/db/artists'
 
 
