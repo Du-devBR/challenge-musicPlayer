@@ -1,0 +1,125 @@
+.container
+  width: 100%
+  height: 100vh
+  display: flex
+  align-items: center
+  justify-content: center
+
+  .container-player
+    display: flex
+    flex-direction: column
+    background-color: #2A2141
+    border-radius: 10px
+    padding: 32px 64px
+    gap: 32px
+
+    .music-artist
+      display: flex
+      align-items: center
+      gap: 32px
+
+      img
+        width: 84px
+        height: 84px
+        background-color: #521dd8
+        border-radius: 6px
+
+      .artist-content
+        display: flex
+        flex-direction: column
+        gap: 4px
+
+        .name-music
+          color: #E1E1E6
+          font-size: 24px
+          font-weight: bold
+
+        .name-artist
+          color: #e1e1e68e
+          font-size: 19px
+          font-weight: normal
+
+    .controls-music
+      display: flex
+      align-items: center
+      justify-content: space-between
+
+      .back-music
+        display: flex
+
+        .back-one
+          width: 0px
+          height: 0px
+          border-radius: 2px
+          border-top: 8px solid transparent
+          border-bottom: 8px solid transparent
+          border-right: 16px solid #e1e1e6
+
+        .back-two
+          width: 0px
+          height: 0px
+          margin-left: -2px
+          border-radius: 2px
+          border-top: 8px solid transparent
+          border-bottom: 8px solid transparent
+          border-right: 16px solid #e1e1e6
+
+      .play-music
+        width: 0px
+        height: 0px
+        border-radius: 2px
+        border-top: 14px solid transparent
+        border-bottom: 14px solid transparent
+        border-left: 28px solid #e1e1e6
+
+      .next-music
+        display: flex
+
+        .next-one
+          width: 0px
+          height: 0px
+          border-radius: 2px
+          border-top: 8px solid transparent
+          border-bottom: 8px solid transparent
+          border-left: 16px solid #e1e1e6
+
+        .next-two
+          width: 0px
+          height: 0px
+          margin-left: -2px
+          border-radius: 2px
+          border-top: 8px solid transparent
+          border-bottom: 8px solid transparent
+          border-left: 16px solid #e1e1e6
+
+    .music-progress
+      display: flex
+      flex-direction: column
+      gap: 8px
+
+      .progress-bar
+        display: block
+        position: relative
+
+        .progress-bar-initial
+          position: absolute
+          width: 100%
+          height: 8px
+          background-color: #d9d9d979
+          border-radius: 8px
+
+        .progress-bar-end
+          position: relative
+          width: 84%
+          height: 8px
+          background-color: #d9d9d9
+          border-radius: 8px
+
+    .time-music
+      display: flex
+      justify-content: space-between
+
+      .time-music, .time-music-end
+        font-size: 14px
+        font-weight: normal
+        color: #c4c4cc85
