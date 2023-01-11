@@ -1,9 +1,20 @@
 import './style.sass'
 import '../style/responsive.sass'
 import {  artists  } from '../assets/db/artists'
-
+import { useState } from 'react'
 
 export function Player(){
+
+  const [play, setPlay] = useState(false)
+
+  function changeSelectPlay(){
+    setPlay(true)
+  }
+
+  function changeSelectPause(){
+    setPlay(false)
+  }
+
   return(
     <div className="container">
       <div className="container-player">
@@ -19,7 +30,14 @@ export function Player(){
             <div className='back-one'></div>
             <div className='back-two'></div>
           </div>
-          <div className="play-music">
+          <div className="play-music-control">
+            <div className="play-music">
+              <div className={play ? 'visible-button' : 'play'} onClick={changeSelectPlay}></div>
+              <div className={play ? 'pause' : 'visible-button'} onClick={changeSelectPause}>
+                <div className='pause-one'></div>
+                <div className='pause-two'></div>
+            </div>
+            </div>
 
           </div>
           <div className="next-music">

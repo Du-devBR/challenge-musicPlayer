@@ -64,13 +64,49 @@
           border-bottom: 8px solid transparent
           border-right: 16px solid #e1e1e6
 
-      .play-music
-        width: 0px
-        height: 0px
-        border-radius: 2px
-        border-top: 14px solid transparent
-        border-bottom: 14px solid transparent
-        border-left: 28px solid #e1e1e6
+      // .play-music
+      //
+
+      .play-music-control
+        display: block
+        position: relative
+
+        .play-music
+          display: block
+          position: relative
+
+          .play
+            width: 0px
+            height: 0px
+            border-radius: 2px
+            border-top: 14px solid transparent
+            border-bottom: 14px solid transparent
+            border-left: 28px solid #e1e1e6
+            position: relative
+            cursor: pointer
+
+          .pause
+            position: relative
+            top: 0
+            display: flex
+            gap: 10px
+            cursor: pointer
+
+            .pause-one
+              width: 5px
+              height: 28px
+              background-color: #e1e1e6
+              border-radius: 2px
+
+            .pause-two
+              width: 5px
+              height: 28px
+              background-color: #e1e1e6
+              border-radius: 2px
+
+          .visible-button
+            opacity: 0
+
 
       .next-music
         display: flex
