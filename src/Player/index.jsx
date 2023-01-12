@@ -2,10 +2,15 @@ import './style.sass'
 import '../style/responsive.sass'
 import {  artists  } from '../assets/db/artists'
 import { useState } from 'react'
+import { useEffect } from 'react'
 
 export function Player(){
 
   const [play, setPlay] = useState(false)
+  const [timeEnd, setTimeEnd] = useState(0)
+
+  const [second, setSeconds] = useState(0)
+  const [minute, setMinutes] = useState(0)
 
   function changeSelectPlay(){
     setPlay(true)
@@ -14,6 +19,28 @@ export function Player(){
   function changeSelectPause(){
     setPlay(false)
   }
+
+ useEffect(() => {
+  if(play){
+    setTimeout(() => {
+      setTimeEnd(timeEnd +1)
+    }, 1000);
+
+    setTimeout(() => {
+      setSeconds(second +1)
+    }, 1000);
+  }
+
+ })
+
+ useEffect(() => {
+  if(second >= 60) {
+    setSeconds(1)
+    setMinutes(minute+1)
+  }
+ })
+
+
 
   return(
     <div className="container">
@@ -51,8 +78,8 @@ export function Player(){
             <div className="progress-bar-end"></div>
           </div>
           <div className="time-music">
-            <span className='time-music'>03:20</span>
-            <span className='time-music-end'>00:14</span>
+            <span className='time-music'>{minute}:{second}</span>
+            <span className='time-music-end'>03:20</span>
           </div>
         </div>
       </div>
