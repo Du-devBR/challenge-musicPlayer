@@ -8,7 +8,7 @@ export function Player(){
 
   const [play, setPlay] = useState(false)
   const [timeEnd, setTimeEnd] = useState(0)
-
+  const [timeMusic, setTimeMusic] = useState(0)
   const [second, setSeconds] = useState(0)
   const [minute, setMinutes] = useState(0)
 
@@ -21,16 +21,20 @@ export function Player(){
   }
 
  useEffect(() => {
-  if(play){
-    setTimeout(() => {
-      setTimeEnd(timeEnd +1)
-    }, 1000);
+  if(timeEnd < `${artists.minutes}`){
+    if(play){
+      setTimeout(() => {
+        setTimeEnd(timeEnd +1)
+      }, 1000);
 
-    setTimeout(() => {
-      setSeconds(second +1)
-    }, 1000);
+      setTimeout(() => {
+        setSeconds(second +1)
+      }, 1000);
+
+    }
+  }else{
+    setPlay(false)
   }
-
  })
 
  useEffect(() => {
@@ -40,8 +44,21 @@ export function Player(){
   }
  })
 
+ useEffect(() => {
+  if(timeMusic < 99){
+    if(timeEnd >= 1){
+      setTimeMusic((100/`${artists.minutes}`) + timeMusic)
+    }
+  }else{
+    setPlay(false)
+  }
+
+ }, [timeEnd])
+
+ console.log('tempo da musica: ' + timeMusic)
 
 
+console.log('contador' + ': ' + timeEnd)
   return(
     <div className="container">
       <div className="container-player">
@@ -75,7 +92,7 @@ export function Player(){
         <div className="music-progress">
           <div className="progress-bar">
             <div className="progress-bar-initial"></div>
-            <div className="progress-bar-end"></div>
+            <div className="progress-bar-end" style={{width: timeMusic+'%'}}></div>
           </div>
           <div className="time-music">
             <span className='time-music'>{minute}:{second}</span>
