@@ -12,16 +12,71 @@ export function Player(){
   const [second, setSeconds] = useState(0)
   const [minute, setMinutes] = useState(0)
 
+  const [hoursMusic, setHoursMusic] = useState(0)
+  const [minutesMusic, setMinutesMusic] = useState(0)
+  const [secondsMusic, setSecondsMusic] = useState(0)
+  const [timeMusicView, setTimeMusicView] = useState('')
+
+  const [idArtist, setIdArtist] = useState(0)
+
+  console.log(timeEnd)
+
   function changeSelectPlay(){
     setPlay(true)
+
   }
 
   function changeSelectPause(){
     setPlay(false)
   }
 
+  function nextMusicPlay(){
+    if(idArtist >= artists.length-1){
+      setIdArtist(0)
+      if(play){
+        setPlay(false)
+      }
+    }else{
+      if(idArtist >= 0) {
+        setIdArtist(idArtist +1)
+        if(play){
+          setPlay(false)
+
+        }
+      }
+    }
+  }
+
+  function backMusicPlay(){
+    if(idArtist <= 0){
+      setIdArtist(0)
+    }else{
+      if(idArtist >= 0) {
+        setIdArtist(idArtist -1)
+        if(play){
+          setPlay(false)
+        }
+
+      }
+    }
+  }
+
+  useEffect(() => {
+    setTimeout(() => {
+      setTimeMusic(0)
+      setSeconds(0)
+      setMinutes(0)
+      setTimeEnd(0)
+    }, 1000);
+
+    setTimeout(() => {
+      setPlay(true)
+    }, 2000);
+
+  }, [idArtist])
+
  useEffect(() => {
-  if(timeEnd < `${artists.minutes}`){
+  if(timeEnd < `${artists[idArtist].minutes}`){
     if(play){
       setTimeout(() => {
         setTimeEnd(timeEnd +1)
@@ -47,7 +102,7 @@ export function Player(){
  useEffect(() => {
   if(timeMusic < 99){
     if(timeEnd >= 1){
-      setTimeMusic((100/`${artists.minutes}`) + timeMusic)
+      setTimeMusic((100/`${artists[idArtist].minutes}`) + timeMusic)
     }
   }else{
     setPlay(false)
@@ -55,22 +110,32 @@ export function Player(){
 
  }, [timeEnd])
 
- console.log('tempo da musica: ' + timeMusic)
+ useEffect(() => {
 
+  setHoursMusic(parseInt(artists[idArtist].minutes/3600))
+  setMinutesMusic(parseInt((artists[idArtist].minutes%3600) / 60))
+  setSecondsMusic(parseInt((artists[idArtist].minutes%3600) % 60))
 
-console.log('contador' + ': ' + timeEnd)
+  if(artists.minutes >= 3600){
+    setTimeMusicView(`${hoursMusic}:${minutesMusic}:${secondsMusic}`)
+  }else{
+    setTimeMusicView(`${minutesMusic}:${secondsMusic}`)
+  }
+
+ })
+
   return(
     <div className="container">
       <div className="container-player">
         <div className="music-artist">
-          <img src={artists.picture} alt="" />
+          <img src={artists[idArtist].picture} alt="" />
           <div className="artist-content">
-            <h1 className="name-music">{artists.artist}</h1>
-            <h2 className="name-artist">{artists.music}</h2>
+            <h1 className="name-music">{artists[idArtist].artist}</h1>
+            <h2 className="name-artist">{artists[idArtist].music}</h2>
           </div>
         </div>
         <div className="controls-music">
-          <div className="back-music">
+          <div className="back-music" onClick={backMusicPlay}>
             <div className='back-one'></div>
             <div className='back-two'></div>
           </div>
@@ -84,7 +149,7 @@ console.log('contador' + ': ' + timeEnd)
             </div>
 
           </div>
-          <div className="next-music">
+          <div className="next-music" onClick={nextMusicPlay}>
             <div className='next-one'></div>
             <div className='next-two'></div>
           </div>
@@ -96,7 +161,7 @@ console.log('contador' + ': ' + timeEnd)
           </div>
           <div className="time-music">
             <span className='time-music'>{minute}:{second}</span>
-            <span className='time-music-end'>03:20</span>
+            <span className='time-music-end'>{timeMusicView}</span>
           </div>
         </div>
       </div>
